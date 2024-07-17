@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Informações de Produto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .resultado {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Gerador de Informações de Produto</h2>
+    <form id="formProduto">
+        <label for="nomeProduto">Nome do Produto:</label>
+        <input type="text" id="nomeProduto" required>
+        <label for="tamanhoEixo">Tamanho do Eixo (mm):</label>
+        <input type="number" id="tamanhoEixo" required>
+        <button type="button" onclick="gerarInformacoesProduto()">Gerar Informações</button>
+    </form>
+    
+    <div class="resultado" id="resultadoProduto" style="display: none;">
+        <h3>Informações do Produto:</h3>
+        <p id="tituloSeo"></p>
+        <p id="descricao"></p>
+        <p id="urlAmigavel"></p>
+    </div>
+
+    <script>
+        function gerarInformacoesProduto() {
+            var nomeProduto = document.getElementById('nomeProduto').value.toUpperCase();
+            var tamanhoEixo = document.getElementById('tamanhoEixo').value;
+
+            var tituloSeo = `${nomeProduto} ${tamanhoEixo}mm - Alta Qualidade e Durabilidade`;
+
+            var descricao = `${nomeProduto} ${tamanhoEixo}mm, ideal para aplicações industriais exigentes. `
+                + `Fabricado com materiais de alta resistência, proporciona suporte robusto e confiável `
+                + `para eixos de ${tamanhoEixo}mm. Confiável e durável, garantindo operações estáveis e eficientes.`;
+
+            var urlAmigavel = `/mancal-${nomeProduto.toLowerCase().replace(' ', '-')}-${tamanhoEixo}mm`;
+
+            document.getElementById('tituloSeo').textContent = tituloSeo;
+            document.getElementById('descricao').textContent = descricao;
+            document.getElementById('urlAmigavel').textContent = urlAmigavel;
+
+            document.getElementById('resultadoProduto').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
