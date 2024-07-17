@@ -58,60 +58,62 @@
     <div class="resultado" id="resultadoProduto" style="display: none;">
         <h3>Informações do Produto:</h3>
         <p id="tituloSeo"></p>
-      <button onclick="copiarTexto('tituloSeo')">Copiar</button>
+        <button onclick="copiarTexto('tituloSeo')">Copiar</button>
+        <button onclick="gerarOutro()">Gerar Outro > </button>
         <div class="descricao">
             <p id="descricao1"></p>
             <button onclick="copiarTexto('descricao1')">Copiar</button>
+            <button onclick="gerarOutro()">Gerar Outro > </button>
         </div>
         <div class="descricao">
-            <p id="descricao2"></p>
-            <button onclick="copiarTexto('descricao2')">Copiar</button>
+            <p id="urlAmigavel"></p>
+            <button onclick="copiarTexto('urlAmigavel')">Copiar</button>
         </div>
-        <div class="descricao">
-            <p id="descricao3"></p>
-            <button onclick="copiarTexto('descricao3')">Copiar</button>
-        </div>
-        <div class="descricao">
-            <p id="descricao4"></p>
-            <button onclick="copiarTexto('descricao4')">Copiar</button>
-        </div>
-        <p id="urlAmigavel"></p>
-      <button onclick="copiarTexto('urlAmigavel')">Copiar</button>
     </div>
 
     <script>
+        var descricaoAtual = 0;
+        var titulos = [];
+        var descricoes = [];
+        var urlAmigavel = '';
+
         function gerarInformacoesProduto() {
             var nomeProduto = document.getElementById('nomeProduto').value.toUpperCase();
             var tamanhoEixo = document.getElementById('tamanhoEixo').value;
 
-            var tituloSeo = `${nomeProduto} ${tamanhoEixo}mm - Alta Qualidade e Durabilidade`;
+            titulos = [
+                `${nomeProduto} ${tamanhoEixo}mm - Alta Qualidade e Durabilidade`,
+                `${nomeProduto} ${tamanhoEixo}mm - Resistência Premium para Indústria`,
+                `${nomeProduto} ${tamanhoEixo}mm - Confiabilidade em Ambientes Industriais`
+            ];
 
-            var descricao1 = `${nomeProduto} ${tamanhoEixo}mm, ideal para aplicações industriais exigentes. `
+            descricoes = [
+                `${nomeProduto} ${tamanhoEixo}mm, ideal para aplicações industriais exigentes. `
                 + `Fabricado com materiais de alta resistência, proporciona suporte robusto e confiável `
-                + `para eixos de ${tamanhoEixo}mm. Confiável e durável, garantindo operações estáveis e eficientes.`;
+                + `para eixos de ${tamanhoEixo}mm. Confiável e durável, garantindo operações estáveis e eficientes.`,
 
-            var descricao2 = `${nomeProduto} ${tamanhoEixo}mm, projetado para atender às demandas severas da indústria. `
+                `${nomeProduto} ${tamanhoEixo}mm, projetado para atender às demandas severas da indústria. `
                 + `Construído com materiais premium, oferece suporte resistente e durável `
-                + `para eixos de ${tamanhoEixo}mm. Garantia de desempenho superior em ambientes desafiadores.`;
+                + `para eixos de ${tamanhoEixo}mm. Garantia de desempenho superior em ambientes desafiadores.`,
 
-            var descricao3 = `${nomeProduto} ${tamanhoEixo}mm, versátil e robusto para diversas aplicações industriais. `
+                `${nomeProduto} ${tamanhoEixo}mm, versátil e robusto para diversas aplicações industriais. `
                 + `Com estrutura resistente, suporta eixos de ${tamanhoEixo}mm com confiança e eficiência, `
-                + `garantindo operações estáveis e duráveis.`;
+                + `garantindo operações estáveis e duráveis.`
+            ];
 
-            var descricao4 = `${nomeProduto} ${tamanhoEixo}mm, essencial para otimização de processos industriais. `
-                + `Projetado com foco em resistência e confiabilidade, oferece suporte robusto `
-                + `para eixos de ${tamanhoEixo}mm, assegurando operações eficientes e consistentes.`;
+            urlAmigavel = `/mancal-${nomeProduto.toLowerCase().replace(' ', '-')}-${tamanhoEixo}mm`;
 
-            var urlAmigavel = `/mancal-${nomeProduto.toLowerCase().replace(' ', '-')}-${tamanhoEixo}mm`;
-
-            document.getElementById('tituloSeo').textContent = tituloSeo;
-            document.getElementById('descricao1').textContent = descricao1;
-            document.getElementById('descricao2').textContent = descricao2;
-            document.getElementById('descricao3').textContent = descricao3;
-            document.getElementById('descricao4').textContent = descricao4;
+            document.getElementById('tituloSeo').textContent = titulos[descricaoAtual];
+            document.getElementById('descricao1').textContent = descricoes[descricaoAtual];
             document.getElementById('urlAmigavel').textContent = urlAmigavel;
 
             document.getElementById('resultadoProduto').style.display = 'block';
+        }
+
+        function gerarOutro() {
+            descricaoAtual = (descricaoAtual + 1) % descricoes.length;
+            document.getElementById('tituloSeo').textContent = titulos[descricaoAtual];
+            document.getElementById('descricao1').textContent = descricoes[descricaoAtual];
         }
 
         function copiarTexto(elementoId) {
