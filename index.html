@@ -29,6 +29,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-top: 10px;
         }
         button:hover {
             background-color: #45a049;
@@ -38,6 +39,9 @@
             border: 1px solid #ccc;
             padding: 10px;
             border-radius: 4px;
+        }
+        .descricao {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -54,10 +58,22 @@
     <div class="resultado" id="resultadoProduto" style="display: none;">
         <h3>Informações do Produto:</h3>
         <p id="tituloSeo"></p>
-        <p id="descricao1"></p>
-        <p id="descricao2"></p>
-        <p id="descricao3"></p>
-        <p id="descricao4"></p>
+        <div class="descricao">
+            <p id="descricao1"></p>
+            <button onclick="copiarTexto('descricao1')">Copiar</button>
+        </div>
+        <div class="descricao">
+            <p id="descricao2"></p>
+            <button onclick="copiarTexto('descricao2')">Copiar</button>
+        </div>
+        <div class="descricao">
+            <p id="descricao3"></p>
+            <button onclick="copiarTexto('descricao3')">Copiar</button>
+        </div>
+        <div class="descricao">
+            <p id="descricao4"></p>
+            <button onclick="copiarTexto('descricao4')">Copiar</button>
+        </div>
         <p id="urlAmigavel"></p>
     </div>
 
@@ -94,6 +110,15 @@
             document.getElementById('urlAmigavel').textContent = urlAmigavel;
 
             document.getElementById('resultadoProduto').style.display = 'block';
+        }
+
+        function copiarTexto(elementoId) {
+            var texto = document.getElementById(elementoId).textContent;
+            navigator.clipboard.writeText(texto).then(function() {
+                alert('Texto copiado com sucesso!');
+            }, function(err) {
+                console.error('Erro ao copiar texto: ', err);
+            });
         }
     </script>
 </body>
